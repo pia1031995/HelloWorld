@@ -1,0 +1,443 @@
+<div layout="column" layout-gt-md="row">
+  <div flex="20"></div>
+  <div flex="60">
+    <br>
+    <br>
+    <h1 class="md-display-1">Student Proctor Form</h1>
+    <ol>
+      <li>PTG scheme is intended to provide parental support to students in the college.</li>
+      <li>The interactions between teachers and students are intended to address the issues related       to student psychology, stress, medical and motivational problems which may affect his/her       performance and well being as an individual.</li>
+      <li>Identify and analyze the issues related to students at various levels and take necessary         actions to address these issues.</li>
+    </ol>
+
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+          <!-- ######################### TAB 1 ####################### -->
+          <md-tab label="Basic Details">
+            <md-content class="md-padding">
+              <div layout="column">
+                <form ng-submit="saveProctor(user)" name="form1" novalidate>
+
+              <!-- fname : {{form1.firstname.$pristine}}
+              fname : {{form1.firstname.$untouched}} -->
+                <!-- <md-subheader class="md-primary">Unread Messages</md-subheader> -->
+                <div layout="row">
+
+                  <md-input-container flex>
+                       <label>First Name</label>
+                       <input ng-model="user.firstname" name="firstname" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+
+                  <md-input-container flex>
+                       <label>Last Name</label>
+                       <input ng-model="user.lastname" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Student ID</label>
+                       <input ng-model="user.studentID" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm>
+                          <label>Branch</label>
+                          <md-select ng-model="user.branch">
+                          <md-option ng-value="branch.value" ng-repeat="branch in branchList" ng-required="true">{{branch.name}}</md-option>
+                          </md-select>
+                  </md-input-container>
+                  <md-input-container class="md-block" flex-gt-sm>
+                          <label>Shift</label>
+                          <md-select ng-model="user.shift">
+                          <md-option ng-value="shift.value" ng-repeat="shift in shiftList" ng-required="true">{{shift.time}}</md-option>
+                          </md-select>
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                          <label>Year of Admission</label>
+                          <md-select ng-model="user.yoa">
+                          <md-option ng-value="yoa.value" ng-repeat="yoa in yoaList" ng-required="true">{{yoa.year}}</md-option>
+                          </md-select>
+                  </md-input-container>
+                  <md-datepicker ng-model="user.myDate" md-placeholder="Date of Birth" style="margin-top: 15px;" class="md-block" flex-gt-sm></md-datepicker>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Email</label>
+                       <input ng-model="user.email" type="email" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Phone Number(M)</label>
+                       <input ng-required="true" type="number"  ng-model="user.phone"  />
+                       <!-- min="1111111111"
+                         max="9999999999" ng-pattern="/^1234567890$/"step="any" name="rate" -->
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                        <label>Local Address </label>
+                        <input type="text" ng-model="user.Laddress" ng-required="true" autocomplete="off">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container class="md-block" flex-gt-sm>
+                        <label>Permanent Address </label>
+                        <input type="text" ng-model="user.Paddress" ng-required="true" autocomplete="off">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Father's Name</label>
+                       <input ng-model="user.fathername" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Father's Occupation</label>
+                       <input ng-model="user.foccupation" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Contact(Email / Phone )</label>
+                       <input ng-model="user.fcontact" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Mother's Name</label>
+                       <input ng-model="user.mothername" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Mother's Occupation</label>
+                       <input ng-model="user.moccupation" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Contact(Email / Phone )</label>
+                       <input ng-model="user.mcontact" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Local Guardian</label>
+                       <input ng-model="user.guardianname" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Contact(Phone)</label>
+                       <input ng-model="user.gcontact" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                       <label>Family Doctor's Name</label>
+                       <input ng-model="user.docname" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                  <md-input-container flex>
+                       <label>Contact (Phone)</label>
+                       <input ng-model="user.docContact" type="text" autocomplete="off" ng-required="true">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                      <label>Medical History</label>
+                      <input ng-model="user.medicalHistory" type="text" autocomplete="off" ng-required="true" placeholder="If any such as Major diseases, Undergone treatment for, Operated for, Allergies etc."
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                  <md-input-container flex>
+                      <label>Personality Traits</label>
+                      <input ng-model="user.Personality" type="text" autocomplete="off" ng-required="true" placeholder="Likes, Dislikes, Talents & skills, Strengths, Weaknesses, Extrovert/Introvert/Tea, Player/Team Leader etc.">
+                  </md-input-container>
+                </div>
+                <div layout="row">
+                    <md-input-container flex>
+                      <label>Interests & Hobbies </label>
+                      <input ng-model="user.interests" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Achievement / Award </label>
+                      <input ng-model="user.awards" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Role Model/ Inspiration </label>
+                      <input ng-model="user.roleModel" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                </div>
+                <md-button type="submit" class="md-primary">Submit</md-button>
+              </form>
+              </div>
+            </md-content>
+          </md-tab>
+
+          <!-- ######################### TAB 2 ####################### -->
+
+          <md-tab label="Academic Information">
+            <md-content class="md-padding" ng-controller="academicInfoCtrl">
+              <div layout="column" ng-show="positiveServResp">
+                <form ng-submit="submitAcademicInfo(academicData)" name="academicDataForm" novalidate>
+                  <md-subheader class="md-primary">SSC</md-subheader>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Year Of Passing</label>
+                      <input ng-model="academicData.yop" type="text" placeholder="dd-mm-yyyy" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>School Attended</label>
+                      <input ng-model="academicData.institute" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>% Marks</label>
+                      <input ng-model="academicData.percentage" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Subjects Studied / Of Interest</label>
+                      <input ng-model="academicData.subjects" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Achievements / Activities </label>
+                      <input ng-model="academicData.achievements" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Problems / Difficulties Faced</label>
+                      <input ng-model="academicData.problems" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                  </div>
+                  <md-subheader class="md-primary">HSC / Diploma</md-subheader>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Year Of Passing</label>
+                      <input ng-model="academicData.yop1" type="text" placeholder="dd-mm-yyyy" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>College Attended</label>
+                      <input ng-model="academicData.institute1" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>% Marks</label>
+                      <input ng-model="academicData.percentage1" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                  </div>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Subjects Studied / Of Interest</label>
+                      <input ng-model="academicData.subjects1" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Achievements / Activities </label>
+                      <input ng-model="academicData.achievements1" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Problems / Difficulties Faced</label>
+                      <input ng-model="academicData.problems1" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                  </div>
+                  <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+              </div>
+              <div ng-show="negativeServResp">
+                <h3 style="color:#F44336;"> You have already entered data for this section.</h3>
+              </div>
+              <div ng-show="thankYou">
+                <h3 style="color:#F44336;"> Thank You your data has been submitted.</h3>
+              </div>
+            </md-content>
+          </md-tab>
+
+          <!-- ######################### TAB 3 ####################### -->
+
+
+          <md-tab label="Attendance Record">
+            <md-content class="md-padding" ng-controller="attendanceCtrl">
+              <div layout="column">
+                <form ng-submit="checkUserEntry(userData)" name="checkEntry" novalidate>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Class</label>
+                      <md-select ng-model="userData.class">
+                        <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Semester</label>
+                      <md-select ng-model="userData.sem">
+                        <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+              </div>
+              <div layout="column" ng-show="positiveServerResp">
+                <form ng-submit="saveAttendanceData(attendanceData)" novalidate>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Fortnight 1</label>
+                      <input type="number" ng-model="attendanceData.f1" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 2</label>
+                      <input type="number" ng-model="attendanceData.f2" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 3</label>
+                      <input type="number" ng-model="attendanceData.f3" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 4</label>
+                      <input type="number" ng-model="attendanceData.f4" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 5</label>
+                      <input type="number" ng-model="attendanceData.f5" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 6</label>
+                      <input type="number" ng-model="attendanceData.f6" ng-required="true">
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Fortnight 7</label>
+                      <input type="number" ng-model="attendanceData.f7" ng-required="true">
+                    </md-input-container>
+                  </div>
+                  <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+              </div>
+              <div layout="column" ng-show="negativeServerResp">
+                <h3 style="color:#F44336;"> You have already entered data.</h3>
+              </div>
+              <div ng-show="thankYou">
+                <h3 style="color:#F44336;"> Thank You your data has been submitted.</h3>
+              </div>
+            </md-content>
+          </md-tab>
+
+          <!-- ######################### TAB 4 ####################### -->
+
+          <md-tab label="Unit Test Performance">
+            <md-content class="md-padding" ng-controller="unitTestDataCtrl">
+              <div layout="column">
+                <form ng-submit="checkUserEntry(userData)" name="unitTestForm" novalidate>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Class</label>
+                      <md-select ng-model="userData.class">
+                        <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Semester</label>
+                      <md-select ng-model="userData.sem">
+                        <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Unit Test</label>
+                      <md-select ng-model="userData.ut">
+                        <md-option ng-value="ut.value" ng-repeat="ut in unitTests" ng-required="true">{{ut.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+
+              </div>
+              <div layout="column" ng-show="serverRespTrue">
+                  <form ng-submit="saveUnitTestData(unitTestData)" novalidate>
+                      <div layout="row">
+                          <md-input-container flex>
+                            <label>Total Subjects</label>
+                            <input type="number" ng-model="unitTestData.subjects" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>Appeared</label>
+                            <input type="number" ng-model="unitTestData.appeared" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>Passed</label>
+                            <input type="number" ng-model="unitTestData.passed" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>Failed</label>
+                            <input type="number" ng-model="unitTestData.failed" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                  </form>
+              </div>
+              <div layout="column" ng-show="serverRespFalse">
+                  <h3 style="color:#F44336;"> You have already entered data for this test.</h3>
+              </div>
+            </md-content>
+          </md-tab>
+
+
+
+
+
+          <!-- ######################### NEW TAB - Priyanka PTG faculty record  ####################### -->
+
+
+          <md-tab label="PTG Faculty Record">
+            <md-content class="md-padding" ng-controller="ptgRecordCtrl">
+              <div layout="column">
+                <form ng-submit="checkUserEntry(userData)" name="PTGForm" novalidate>
+                  <div layout="row">
+                    <md-input-container flex>
+                      <label>Class</label>
+                      <md-select ng-model="userData.class">
+                        <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Semester</label>
+                      <md-select ng-model="userData.sem">
+                        <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+                  <md-button type="submit" class="md-primary">Submit</md-button>
+                </form>
+
+              </div>
+              <div layout="column" ng-show="serverRespTrue">
+                  <form ng-submit="savePTGData(unitTestData)" novalidate>
+                      <div layout="row">
+                          <md-input-container flex>
+                            <label>Academic Year</label>
+                            <input type="number" ng-model="PTGData.years" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>ROLL NO</label>
+                            <input type="number" ng-model="PTGData.roll" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>Name of PTG</label>
+                            <input type="text" ng-model="PTGData.name" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                          <label>Contact Number</label>
+                            <input type="number" ng-model="PTGData.contact" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                          <md-input-container flex>
+                            <label>Remark of PTG</label>
+                            <input type="text" ng-model="PTGData.remark" autocomplete="off" ng-required="true">
+                          </md-input-container>
+                      </div>
+                      <md-button type="submit" class="md-primary">Submit</md-button>
+                  </form>
+              </div>
+              <div layout="column" ng-show="serverRespFalse">
+                  <h3 style="color:#F44336;"> You have already entered data for this test.</h3>
+              </div>
+            </md-content>
+          </md-tab>
+
+
+
+        </md-tabs>
+      </md-content>
+
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+  <div flex="20"></div>
+</div>
