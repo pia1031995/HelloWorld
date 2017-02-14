@@ -97,7 +97,7 @@
 
     }])
     .controller('userHomeCtrl',['$scope',function($scope){
-        $scope.message = "Welcome to the dashboard";
+        $scope.message = "Hello! Welcome to PCCoE Proctor Dashboard";
     }])
     .controller('profileMenuCtrl',['$scope','Authenticate','$state',function($scope,Authenticate,$state){
         $scope.logout = function(){
@@ -105,47 +105,9 @@
           $state.go('home',{});
         }
     }])
-    .controller('attendanceCtrl',['$scope','attendanceData',function($scope,attendanceData){
-          $scope.classes = [
-            { name: 'First Year', value: '1' },
-            { name: 'Second Year', value: '2' },
-            { name: 'Third Year', value: '3' },
-            { name: 'Fourth Year', value: '4' }
-          ];
-            $scope.semester = [
-            { name: 'I', value: '1' },
-            { name: 'II', value: '2' }
-          ];
-
-          $scope.checkUserEntry=function(userData){
-            var $data=angular.toJson(userData);
-            console.log($data);
-            attendanceData.checkEntryAttendance($scope,$data).then(function(userData){
-              console.log(userData.data);
-              if(userData.data==0){
-                  $scope.serverRespFalse = false;
-                  $scope.serverRespTrue = true;
-                }
-              else {
-                  $scope.serverRespFalse = true;
-                  $scope.serverRespTrue = false;
-              }
-            });
-  }
-             $scope.saveAttendanceData= function(userData){
-            var $data = angular.toJson(userData);
-            attendanceData.storeAttendanceData($scope,$data).then(function(userData){
-
-              $scope.serverRespFalse = false;
-              $scope.serverRespTrue = false;
-              console.log(userData.data);
-
-            });
-
-          }
-    }])
     .controller('unitTestDataCtrl',['$scope','unitTestData',function($scope,unitTestData){
-          $scope.classes = [
+
+      $scope.classes = [
             { name: 'F.E.', value: '1' },
             { name: 'S.E.', value: '2' },
               { name: 'T.E.', value: '3' },
@@ -187,7 +149,49 @@
             });
           }
     }])
-    
+    .controller('attendanceCtrl',['$scope','attendanceData',function($scope,attendanceData){
+      $scope.classes = [
+        { name: 'First Year', value: '1' },
+        { name: 'Second Year', value: '2' },
+        { name: 'Third Year', value: '3' },
+        { name: 'Fourth Year', value: '4' }
+      ];
+        $scope.semester = [
+        { name: 'I', value: '1' },
+        { name: 'II', value: '2' }
+      ];
+
+      $scope.checkUserEntry=function(userData){
+        var $data=angular.toJson(userData);
+
+        attendanceData.checkEntryAttendance($scope,$data).then(function(userData){
+
+          if(userData.data == 0){
+              $scope.positiveServerResp = true;
+              $scope.negativeServerResp = false;
+              $scope.thankYou = false;
+            }
+          else {
+              $scope.positiveServerResp = false;
+              $scope.negativeServerResp = true;
+              $scope.thankYou = false;
+              }
+          });
+        }
+
+      $scope.saveAttendanceData = function(userData){
+           var $data = angular.toJson(userData);
+
+           attendanceData.storeAttendanceData($scope,$data).then(function(userData){
+
+             $scope.positiveServerResp = false;
+             $scope.negativeServerResp = false;
+             $scope.thankYou = true;
+
+          });
+        }
+
+    }])
     .controller('academicInfoCtrl',['$scope','academicData',function($scope,academicData){
 
       academicData.checkAcademicData().then(function(data){
@@ -222,7 +226,7 @@
       }
     }])
 
-    //*****************PTG Faculty Record****************************************//
+//*****************PTG Faculty Record****************************************//
     .controller('ptgRecordCtrl',['$scope','PTGData',function($scope,PTGData)
     {
           $scope.classes = [
@@ -266,6 +270,34 @@
 
           }
     }])
+
+//****Critical ANALYSIS BY PRIYANKA****************************
+
+    .controller('criticalCtrl', function($scope) {
+      $scope.classes = [
+            { name: 'First Year', value: '1' },
+            { name: 'Second Year', value: '2' },
+            { name: 'Third Year', value: '3' },
+            { name: 'Fourth Year', value: '4' }
+          ];
+            $scope.semester = [
+            { name: 'I', value: '1' },
+            { name: 'II', value: '2' }
+          ];
+      $scope.choices = [];
+      $scope.saveForm = function(){
+        console.log("hello");
+      }
+      $scope.addNewChoice = function() {
+        $scope.choices.push({});
+      };
+
+      $scope.removeChoice = function(item) {
+        $scope.choices.splice(item, 1);
+        };
+
+    })
+
     //#################################################### DIRECTIVES
     .directive('ngUnique', function(user) {
     return {

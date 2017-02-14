@@ -429,6 +429,57 @@
             </md-content>
           </md-tab>
 
+              <!-- ######################### NEW TAB - Priyanka Critical Aanalysis  ####################### -->
+              <md-tab label="Critical Analysis of Student">
+            <md-content class="md-padding" ng-controller= "criticalCtrl">
+              <div layout="column">
+                <form name="univExamForm" ng-submit="saveForm()" novalidate>
+                  <div  data-ng-repeat="choice in choices">
+                    <div layout="row">
+                    <md-input-container flex>
+                      <label>Class</label>
+                      <md-select ng-model="userData.class">
+                        <md-option ng-value="class.value" ng-repeat="class in classes" ng-required="true">{{class.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-input-container flex>
+                      <label>Semester</label>
+                      <md-select ng-model="userData.sem">
+                        <md-option ng-value="sem.value" ng-repeat="sem in semester" ng-required="true">{{sem.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+
+                  <div layout="row">
+
+                    <md-input-container flex>
+                      <label> Appreciations , Disciplinary Actions , Motivational/ Psychological / Medical / Family Issues etc</label>
+                      <input ng-model="userData.comments" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                      <md-input-container flex>
+                      <label> Measures / Actions Suggested by PTG and their review</label>
+                      <input ng-model="userData.actions" type="text" autocomplete="off" ng-required="true">
+                    </md-input-container>
+                    </div>
+                    
+
+                  
+                  </div>
+                    {{choices}}
+                  <md-button class="addfields" ng-click="addNewChoice()">Add fields</md-button>
+                  <md-button class="remove" ng-show="!$first" ng-click="removeChoice($index)">Remove</md-button>
+                </div>
+                  <md-button type="submit">Save</md-button>
+                </form>
+                  {{choice}}
+              </div>
+
+            </md-content>
+          </md-tab>
+
 
 
         </md-tabs>
